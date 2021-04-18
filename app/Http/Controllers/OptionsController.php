@@ -7,6 +7,8 @@ use App\Enums\Age;
 use App\Enums\Countries;
 use App\Enums\Gender;
 use App\Enums\Race;
+use App\Enums\Symptoms;
+use App\Enums\Treatments;
 use App\Enums\RecoveryPercentage;
 use App\Enums\Weight;
 
@@ -17,6 +19,22 @@ class OptionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private function formatTags($obj)
+    {
+        $Array = [];
+        $Collection = collect($obj);
+        $index = 0;
+        foreach ($Collection as $key => $value) {
+            $Array[] = [
+                // 'id' => $index,
+                'value' => $key,
+                'label' => $value
+            ];
+            $index++;
+        }
+        return $Array;
+    }
+
     public function index()
     {
         return response()->json([
@@ -26,8 +44,10 @@ class OptionsController extends Controller
                 'countries'=> Countries::asArray(),
                 'gender'=> Gender::asArray(),
                 'race'=> Race::asArray(),
-                'RecoveryPercentage'=> RecoveryPercentage::asArray(),
-                'Weight'=> Weight::asArray(),
+                'recoveryPercentage'=> RecoveryPercentage::asArray(),
+                'weight'=> Weight::asArray(),
+                'symptoms'=>$this->formatTags(Symptoms::asArray()),
+                'treatment'=>$this->formatTags(Treatments::asArray())
             ],
         ], 200);
     }

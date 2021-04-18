@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\PostsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,5 @@ use App\Http\Controllers\OptionsController;
 */
 
 Route::get('options', [OptionsController::class, 'index'])->name('api.options.show');
+Route::get('posts', [PostsController::class, 'index'])->name('api.posts.show');
+Route::post('posts', [PostsController::class, 'store'])->name('api.posts.store');

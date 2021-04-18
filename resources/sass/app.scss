@@ -1,7 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
+@import "./components/loader";
 body {
     font-family: "Merriweather", serif;
 }
@@ -12,4 +12,26 @@ h4,
 h5,
 h6 {
     font-family: "Lora", serif;
+}
+
+.react-select__input{
+    input{
+        --tw-ring-color: 'transparent'!important;
+    }
+}
+
+.ql-editor{
+    min-height: 200px;
+}
+.ql-toolbar.ql-snow {
+    @apply rounded-t-md;
+    @apply border-gray-300;
+}
+.ql-container.ql-snow {
+    @apply rounded-b-md;
+    @apply border-gray-300;
+}
+.nice-dates-day:after {
+    @apply border-2 #{!important};
+    @apply border-indigo-500 #{!important};
 }

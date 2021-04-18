@@ -11,14 +11,16 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.0.0",
-        "axios": "^0.21",
+        "autoprefixer": "^10.2.5",
+        "axios": "^0.21.1",
         "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.3.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "popper.js": "^1.12",
         "postcss": "^8.1.14",
+        "postcss-import": "^14.0.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "resolve-url-loader": "^3.1.2",
@@ -26,10 +28,24 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "@headlessui/react": "^1.0.0",
+        "@heroicons/react": "^1.0.1",
         "@reduxjs/toolkit": "^1.5.1",
+        "@tailwindcss/forms": "^0.3.2",
+        "date-fns": "^2.21.1",
+        "draft-js": "^0.11.7",
         "formik": "^2.2.6",
+        "react-nice-dates": "^3.1.0",
+        "react-quill": "^2.0.0-beta.2",
+        "react-recaptcha": "^2.3.10",
         "react-redux": "^7.2.3",
+        "react-router": "^5.2.0",
+        "react-router-dom": "^5.2.0",
+        "react-select": "^4.3.0",
+        "react-tag-autocomplete": "^6.1.0",
         "redux": "^4.0.5",
-        "tailwindcss": "^2.1.1"
+        "reoverlay": "^1.0.0",
+        "tailwindcss": "^2.1.1",
+        "yup": "^0.32.9"
     }
 }

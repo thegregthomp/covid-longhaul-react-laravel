@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -24,7 +26,29 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+        $post->name = $request->name;
+        $post->age = $request->age;
+        $post->gender = $request->gender;
+        $post->race = $request->race;
+        $post->weight = $request->weight;
+        $post->ip_address = $request->ip();
+        $post->country = $request->country;
+        $post->infected_date = new Carbon($request->date_infected);
+        $post->fully_recovered = ($request->fully_recovered=='yes')?1:0;
+        $post->recovery_percentage = $request->recovery_percentage;
+        $post->story = $request->story;
+        $post->treatments = implode(",", $request->treatment);
+        $post->symptoms = implode(",", $request->symptoms);
+
+        $post->save();
+
+        return response()->json([
+            'message' => 'success',
+            'data' => [
+                'request' => $post
+            ],
+        ], 200);
     }
 
     /**

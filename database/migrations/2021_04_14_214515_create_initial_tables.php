@@ -23,42 +23,13 @@ class CreateInitialTables extends Migration
             $table->string('race', 100);
             $table->string('gender', 100);
             $table->string('country');
-            $table->date('infected_date');
+            $table->timestamp('infected_date', $precision = 0);
             $table->boolean('fully_recovered');
-            $table->string('recovery_percentage', 4);
+            $table->string('recovery_percentage', 4)->nullable();
             $table->string('weight', 20);
             $table->longText('story');
-            $table->longText('treatment');
-
-
-        });
-
-        Schema::create('symptoms', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('symptoms_reference_id');
-        });
-
-        Schema::create('treatments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('treatment_reference_id');
-        });
-
-        Schema::create('post_symptom', function (Blueprint $table) {
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('symptom_id');
-            $table->primary(['post_id','symptom_id']);
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('symptom_id')->references('id')->on('symptoms');
-        });
-
-        Schema::create('post_treatment', function (Blueprint $table) {
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('treatment_id');
-            $table->primary(['post_id','treatment_id']);
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('treatment_id')->references('id')->on('treatments');
+            $table->string('treatments');
+            $table->string('symptoms');
         });
     }
 
@@ -69,10 +40,6 @@ class CreateInitialTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_symptom');
-        Schema::dropIfExists('post_treatment');
         Schema::dropIfExists('posts');
-        Schema::dropIfExists('symptoms');
-        Schema::dropIfExists('treatment');
     }
 }

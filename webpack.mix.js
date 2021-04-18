@@ -21,7 +21,12 @@ mix.js("resources/js/app.js", "public/js")
             }
         },
         processCssUrls: true,
-        postCss: [tailwindcss("./tailwind.config.js")]
+        postCss: [
+            require('postcss-import'),
+            require('tailwindcss'),
+            require('autoprefixer'),
+            tailwindcss("./tailwind.config.js")
+        ]
     })
     .browserSync("127.0.0.1:8000");
 
