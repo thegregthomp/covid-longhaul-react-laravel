@@ -27,22 +27,6 @@ jobs:
           - run:
               name: Install rsync
               command: sudo apt install -y rsync
-          - restore_cache:
-              keys:
-                  - composer-v1-{{ checksum "composer.json" }}
-                  - composer-v1-
-          - save_cache:
-              key: composer-v1-{{ checksum "composer.json" }}
-              paths:
-                  - vendor
-
-          - restore_cache:
-              key: dependency-cache-{{ checksum "package.json" }}
-
-          - save_cache:
-              key: dependency-cache-{{ checksum "package.json" }}
-              paths:
-                  - ./node_modules
 
           - run:
               name: Deploy
