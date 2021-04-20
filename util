@@ -24,8 +24,7 @@ case ${@:1:1} in
         ssh $remote_server_user@$remote_server_ip -o StrictHostKeyChecking=no "test -d $project_folder || mkdir $project_folder"
         rsync -avz ./ $remote_server_user@$remote_server_ip:$project_folder
         ssh $remote_server_user@$remote_server_ip -o StrictHostKeyChecking=no "sudo chmod 777 -R $project_folder/storage"
-        ssh $remote_server_user@$remote_server_ip -o StrictHostKeyChecking=no "sudo chmod 777 -R $project_folder/public/assets/uploads"
-		ssh $remote_server_user@$remote_server_ip -o StrictHostKeyChecking=no "sudo mv $project_folder/.env.remote $project_folder/.env"
+		ssh $remote_server_user@$remote_server_ip -o StrictHostKeyChecking=no "sudo mv $project_folder/.env.production $project_folder/.env"
     ;;
     sync)
         j=$(printf "%s" 'Host ' $HOSTNAME)
