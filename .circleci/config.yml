@@ -13,6 +13,10 @@ jobs:
               name: Update composer to latest version
               command: sudo composer self-update
           - run:
+              name: Update composer
+              command: sudo composer update
+          - run:
+          - run:
               name: Update composer to latest version
               command: sudo composer install
           - run:
