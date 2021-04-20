@@ -19,6 +19,15 @@ h6 {
         --tw-ring-color: 'transparent'!important;
     }
 }
+.story{
+    p{
+        @apply mb-3;
+        @apply text-gray-700;
+    }
+}
+.serif-font{
+    font-family: "Lora", serif;
+}
 
 .ql-editor{
     min-height: 200px;
@@ -34,4 +43,9 @@ h6 {
 .nice-dates-day:after {
     @apply border-2 #{!important};
     @apply border-indigo-500 #{!important};
+}
+
+.ais-Hits-list{
+    @apply divide-y;
+    @apply divide-gray-200;
 }

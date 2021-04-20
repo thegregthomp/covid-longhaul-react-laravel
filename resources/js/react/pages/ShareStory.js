@@ -21,6 +21,7 @@ import Confirmation from "../components/modals/Confirmation";
 import Error from "../components/modals/Error";
 import { useHistory } from "react-router-dom";
 import Recaptcha from "react-recaptcha";
+import Cookies from "js-cookie";
 //...
 
 const ShareStory = props => {
@@ -78,23 +79,6 @@ const ShareStory = props => {
         ))
     }
 
-    // useEffect(() => {
-    //     if(initialized){
-    //         const script = document.createElement("script");
-    //         script.src = "https://www.google.com/recaptcha/api.js";
-    //         script.async = true;
-    //         script.defer = true;
-    //         script.addEventListener('load', ()=>{
-    //             console.log('Loaded')
-    //             setTimeout(function(){
-    //                 setRecaptchaLoaded(true);
-    //             }, 200);
-    //
-    //         });
-    //         document.body.appendChild(script);
-    //     }
-    // }, [initialized]);
-
     useEffect(() => {
         const promise = dispatch(fetchOptions());
         promise.then(() => {
@@ -105,6 +89,7 @@ const ShareStory = props => {
 
     const formik = useFormik({
         initialValues: {
+            title: "",
             name: "",
             age: "",
             gender: "",
@@ -119,6 +104,7 @@ const ShareStory = props => {
             recaptcha: ""
         },
         validationSchema: Yup.object({
+            title: Yup.string().required("Title is required"),
             name: Yup.string().required("Name is required"),
             age: Yup.string().required("Age is required"),
             gender: Yup.string().required("Gender is required"),
@@ -150,9 +136,17 @@ const ShareStory = props => {
 
     const handleFormSubmission = async values => {
         try {
-            const postsSubmit = await API.post(`/posts`, values);
-            Reoverlay.showModal(Confirmation);
-            history.push("/");
+            if (!Cookies.get("hasSubmittedStory")) {
+                const postsSubmit = await API.post(`/posts`, values);
+                Reoverlay.showModal(Confirmation);
+                Cookies.set("hasSubmittedStory", true);
+                history.push("/");
+            } else {
+                Reoverlay.showModal(Error, {
+                    errorText:
+                        "It looks like you've already submitted a story. If this is an error please email me at greg@thegregthompson.com."
+                });
+            }
         } catch (e) {
             Reoverlay.showModal(Error, {
                 errorText: "There's been an error with your request"
@@ -170,8 +164,8 @@ const ShareStory = props => {
                     className="space-y-8 divide-y divide-gray-200"
                     onSubmit={formik.handleSubmit}
                 >
-                    <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                        <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+                    <div className="space-y-8 divide-y divide-gray-200">
+                        <div className="space-y-6 sm:space-y-5">
                             <div>
                                 <h3 className="text-lg leading-6 font-medium text-gray-900">
                                     Your Story
@@ -183,6 +177,32 @@ const ShareStory = props => {
                                 </p>
                             </div>
                             <div className="space-y-6 sm:space-y-5">
+                                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label
+                                        htmlFor="title"
+                                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                                    >
+                                        Title*
+                                    </label>
+                                    <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            id="title"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.title}
+                                            className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                        />
+                                        {formik.errors.title &&
+                                        formik.touched.title ? (
+                                            <div className="mt-2 text-sm text-red-500">
+                                                {formik.errors.title}
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                </div>
+
                                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label
                                         htmlFor="name"
@@ -589,18 +609,25 @@ const ShareStory = props => {
                                     <label
                                         htmlFor="story"
                                         className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                                    >
-
-                                    </label>
+                                    ></label>
                                     <div className="mt-1 sm:mt-0 sm:col-span-2 text-right flex justify-end">
                                         <div>
                                             {/* {recaptchaLoaded && */}
-                                                <Recaptcha
-                                                    sitekey="6Lf3ja4aAAAAAJkMiSE-uANTSqyrzBUWvCWaMpWF"
-                                                    render="explicit"
-                                                    verifyCallback={(response) => { formik.setFieldValue("recaptcha", response); }}
-                                                    onloadCallback={() => { console.log("done loading!"); }}
-                                                />
+                                            <Recaptcha
+                                                sitekey="6Lf3ja4aAAAAAJkMiSE-uANTSqyrzBUWvCWaMpWF"
+                                                render="explicit"
+                                                verifyCallback={response => {
+                                                    formik.setFieldValue(
+                                                        "recaptcha",
+                                                        response
+                                                    );
+                                                }}
+                                                onloadCallback={() => {
+                                                    console.log(
+                                                        "done loading!"
+                                                    );
+                                                }}
+                                            />
                                             {/* } */}
 
                                             {formik.errors.recaptcha &&
@@ -608,13 +635,10 @@ const ShareStory = props => {
                                                 <div className="mt-2 text-sm text-red-500">
                                                     {formik.errors.recaptcha}
                                                 </div>
-                                            ) : null}</div>
+                                            ) : null}
+                                        </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>

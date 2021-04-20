@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../utils/API";
 
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const fetchOptions = createAsyncThunk(
     "root/fetchOptions",
     async (userId, { signal }) => {
@@ -8,6 +12,7 @@ export const fetchOptions = createAsyncThunk(
         signal.addEventListener("abort", () => {
             source.cancel();
         });
+        // await timeout(2000);
         const response = await API.get(`/options`, {
             cancelToken: source.token
         });

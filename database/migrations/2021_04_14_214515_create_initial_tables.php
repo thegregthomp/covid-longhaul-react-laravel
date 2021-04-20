@@ -17,6 +17,7 @@ class CreateInitialTables extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title');
             $table->string('name')->nullable();
             $table->string('ip_address', 45);
             $table->string('age', 100);

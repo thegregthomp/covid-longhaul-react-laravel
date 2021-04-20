@@ -18,5 +18,6 @@ use App\Http\Controllers\PostsController;
 */
 
 Route::get('options', [OptionsController::class, 'index'])->name('api.options.show');
-Route::get('posts', [PostsController::class, 'index'])->name('api.posts.show');
+Route::get('posts', [PostsController::class, 'index'])->name('api.posts.index');
+Route::get('posts/{id}', [PostsController::class, 'show'])->name('api.posts.show');
 Route::post('posts', [PostsController::class, 'store'])->name('api.posts.store');
