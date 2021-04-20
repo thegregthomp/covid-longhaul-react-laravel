@@ -64,7 +64,7 @@ const Hit = ({ hit }) => {
     };
 
     return (
-        <div className="py-12" key={hit.title}>
+        <div className="py-6 lg:py-10" key={hit.title}>
             <article className="xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
                 <dl>
                     <span className={"text-base leading-6 text-gray-500"}>
@@ -105,11 +105,11 @@ const Hit = ({ hit }) => {
                     <div className="flex">
                         <div className="w-full">
                             {/* <span className="serif-font text-sm text-gray-800">Symptoms</span> */}
-                            <div className="symptom-container mt-4 space-x-2 flex">
+                            <div className="symptom-container mt-4 flex">
                                 {symptoms.map(symptom => (
                                     <span
                                         key={symptom}
-                                        className="inline-block py-1 px-3 text-sm bg-indigo-100 rounded-md"
+                                        className="inline-block py-1 px-3 text-sm bg-indigo-100 rounded-md mr-2 mb-2"
                                     >
                                         {getLabel(symptom)}
                                     </span>
@@ -117,7 +117,7 @@ const Hit = ({ hit }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-end mt-4">
+                    <div className="flex items-center justify-end mt-6">
                         <button
                             type="button"
                             className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

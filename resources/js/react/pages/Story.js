@@ -88,6 +88,10 @@ const Story = props => {
                                             <span className="block text-md text-gray-900">{story.country}</span>
                                         </div>
                                         <div className="mb-2">
+                                            <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Date Infected:</span>
+                                            <span className="block text-md text-gray-900">{story.infected_date}</span>
+                                        </div>
+                                        <div className="mb-2">
                                             <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Fully Recovered?:</span>
                                             <span className="block text-md text-gray-900">{(story.fully_recovered)?'Yes':'No'}</span>
                                         </div>
@@ -143,7 +147,7 @@ const Story = props => {
                                                 {story.title}
                                             </Link>
                                         </h2>
-                                        <span className="text-sm text-gray-500 mt-1 md:mt-0">
+                                        <span className="text-sm text-gray-500 mt-1 md:mt-2">
                                             By: {story.name}
                                         </span>
                                         <div
@@ -153,37 +157,41 @@ const Story = props => {
                                             }}
                                         ></div>
                                     </div>
-                                    <div className="about flex flex-col gap-2 md:hidden">
+                                    <div className="about flex flex-col md:hidden">
                                         <h3 className="mb23 text-md md:text-sm">
                                             About
                                         </h3>
-                                        <div className="flex flex-wrap gap-4">
-                                            <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                        <div className="flex flex-wrap">
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                 <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Age:</span>
                                                 <span className="block text-md text-gray-900">{story.age}</span>
                                             </div>
-                                            <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                 <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Gender:</span>
                                                 <span className="block text-md text-gray-900">{story.gender}</span>
                                             </div>
-                                            <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                 <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Race:</span>
                                                 <span className="block text-md text-gray-900">{story.race}</span>
                                             </div>
-                                            <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                 <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Weight:</span>
                                                 <span className="block text-md text-gray-900">{story.weight}</span>
                                             </div>
-                                            <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                 <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Country:</span>
                                                 <span className="block text-md text-gray-900">{story.country}</span>
                                             </div>
-                                            <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
+                                                <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Date Infected:</span>
+                                                <span className="block text-md text-gray-900">{story.infected_date}</span>
+                                            </div>
+                                            <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                 <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Fully Recovered?:</span>
                                                 <span className="block text-md text-gray-900">{(story.fully_recovered)?'Yes':'No'}</span>
                                             </div>
                                             {(story.fully_recovered != 1) &&
-                                                <div className="py-2 px-3 bg-gray-100 rounded-md">
+                                                <div className="py-2 px-3 mr-2 mb-2 bg-gray-100 rounded-md">
                                                     <span className="inline-block text-sm text-gray-700 border-b border-indigo-500 pb-0.5 mb-0.5">Recovery Percentage:</span>
                                                     <span className="block text-md text-gray-900">{story.recovery_percentage}</span>
                                                 </div>
@@ -194,11 +202,11 @@ const Story = props => {
                                             <h3 className="mb-2 text-md md:text-sm">
                                                 Symptoms
                                             </h3>
-                                            <div className="gap-2 flex flex-wrap">
+                                            <div className="flex flex-wrap">
                                                 {story.symptoms.map(symptom => (
                                                     <span
                                                         key={symptom}
-                                                        className="inline-block py-1 px-3 text-sm bg-indigo-100 rounded-md"
+                                                        className="inline-block py-1 px-3 text-sm bg-indigo-100 rounded-md mr-2 mb-2"
                                                     >
                                                         {symptom}
                                                     </span>
@@ -209,11 +217,11 @@ const Story = props => {
                                             <h3 className="mb-2 text-md md:text-sm">
                                                 Treatments
                                             </h3>
-                                            <div className="gap-2 flex flex-wrap">
+                                            <div className="flex flex-wrap">
                                                 {story.treatments.map(treatment => (
                                                     <span
                                                         key={treatment}
-                                                        className="inline-block py-1 px-3 text-sm bg-green-100 rounded-md"
+                                                        className="inline-block py-1 px-3 text-sm bg-green-100 rounded-md mr-2 mb-2"
                                                     >
                                                         {treatment}
                                                     </span>

@@ -92,6 +92,9 @@ class PostsController extends Controller
         $post->treatments = filterTags($post->treatments, Treatments::asArray());
         $post->symptoms = filterTags($post->symptoms, Symptoms::asArray());
 
+        $carbon = new Carbon($post->infected_date);
+        $post->infected_date = $carbon->toFormattedDateString();
+
         return response()->json([
             'message' => 'success',
             'data' => $post,

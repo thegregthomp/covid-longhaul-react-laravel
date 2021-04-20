@@ -66,8 +66,8 @@ const App = props => {
                                                     src="/img/icon.svg"
                                                     alt="Workflow"
                                                 />
-                                                <span className="serif-font text-xl font-bold ml-2">
-                                                    Long-haulers
+                                                <span className="serif-font text-xl font-bold ml-2 whitespace-nowrap">
+                                                    Long-Haulers
                                                 </span>
                                             </Link>
                                         </div>
