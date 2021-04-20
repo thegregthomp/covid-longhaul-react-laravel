@@ -39,12 +39,6 @@ jobs:
 
           - restore_cache:
               key: dependency-cache-{{ checksum "package.json" }}
-
-          - save_cache:
-              key: dependency-cache-{{ checksum "package.json" }}
-              paths:
-                  - ./node_modules
-
           - run:
               name: Deploy
               command: ./util deploy
