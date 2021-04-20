@@ -19,6 +19,9 @@ jobs:
               name: Update composer to latest version
               command: sudo composer install
           - run:
+              name: install npm
+              command: npm install
+          - run:
               name: Production
               command: npm run prod
           - run:
