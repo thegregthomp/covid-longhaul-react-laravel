@@ -14,6 +14,7 @@ db_location="/var/www/$folder_name--$branch/_db"
 project_folder="/var/www/$folder_name--$branch"
 
 # chmod -R 600 keys/*
+#
 
 case ${@:1:1} in
     init)
