@@ -13,6 +13,9 @@ jobs:
               name: Update composer to latest version
               command: sudo composer self-update
           - run:
+              name: Update composer to latest version
+              command: sudo composer install
+          - run:
               name: Production
               command: npm run prod
           - run:
